@@ -48,3 +48,6 @@ jobs:
           echo "GitHub SHA: $GITHUB_SHA"
           echo "Ausgecheckter Commit:"
           git log -1 --oneline
+
+      - name: Pruefe wichtige Datei
+        run: test -f DATEI_DIE_NICHT_EXISTIERT.txt
