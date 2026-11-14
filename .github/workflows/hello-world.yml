@@ -1,0 +1,21 @@
+name: Mein erster Workflow
+
+on:
+  push:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  hello:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Begruessung
+        run: echo "Hallo von GitHub Actions!"
+
+      - name: Informationen
+        run: |
+          echo "Das ist mein erster Workflow."
+          echo "Der Runner funktioniert!"
