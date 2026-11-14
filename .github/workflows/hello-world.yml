@@ -50,4 +50,4 @@ jobs:
           git log -1 --oneline
 
       - name: Pruefe wichtige Datei
-        run: test -f README.md
+        run: exit 1
