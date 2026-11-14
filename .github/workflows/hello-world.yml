@@ -20,3 +20,15 @@ jobs:
           echo "Repository: $GITHUB_REPOSITORY"
           pwd
           ls -la
+
+      - name: Repository herunterladen
+        uses: actions/checkout@v7
+
+      - name: Repository-Inhalt untersuchen
+        run: |
+          echo "Aktuelles Verzeichnis:"
+          pwd
+          echo "Dateien im Verzeichnis:"
+          ls -la
+          echo "Inhalt der README:"
+          cat README.md
