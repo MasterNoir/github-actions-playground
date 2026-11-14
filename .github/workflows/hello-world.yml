@@ -38,3 +38,13 @@ jobs:
           ls -la
           echo "Inhalt der README:"
           cat README.md
+          
+      - name: Pull Request Informationen
+        run: |
+          echo "Event: $GITHUB_EVENT_NAME"
+          echo "Quellbranch: $GITHUB_HEAD_REF"
+          echo "Zielbranch: $GITHUB_BASE_REF"
+          echo "GitHub Ref: $GITHUB_REF"
+          echo "GitHub SHA: $GITHUB_SHA"
+          echo "Ausgecheckter Commit:"
+          git log -1 --oneline
