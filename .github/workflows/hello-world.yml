@@ -50,4 +50,4 @@ jobs:
           git log -1 --oneline
 
       - name: Pruefe wichtige Datei
-        run: test -f DATEI_DIE_NICHT_EXISTIERT.txt
+        run: test -f README.md
