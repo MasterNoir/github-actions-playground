@@ -1,0 +1,57 @@
+name: Datenfluss verstehen
+
+on:
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  erzeugen:
+    runs-on: ubuntu-latest
+
+    outputs:
+      version: ${{ steps.nummer.outputs.wert }}
+
+    steps:
+      - name: Umgebungsvariable setzen
+        run: echo "MODUS=Training" >> "$GITHUB_ENV"
+
+      - name: Versionsnummer erzeugen
+        id: nummer
+        run: |
+          echo "Modus: $MODUS"
+          echo "wert=1.0.${GITHUB_RUN_NUMBER}" >> "$GITHUB_OUTPUT"
+
+      - name: Datei erzeugen
+        run: |
+          mkdir -p paket
+          echo "Meine erste Build-Datei" > paket/info.txt
+
+      - name: Datei hochladen
+        uses: actions/upload-artifact@v4
+        with:
+          name: demo-paket
+          path: paket/info.txt
+
+  verwenden:
+    needs: erzeugen
+    runs-on: ubuntu-latest
+
+    env:
+      VERSION: ${{ needs.erzeugen.outputs.version }}
+
+    steps:
+      - name: Versionsnummer anzeigen
+        run: echo "Version ist $VERSION"
+
+      - name: Artifact herunterladen
+        uses: actions/download-artifact@v5
+        with:
+          name: demo-paket
+          path: ausgabe
+
+      - name: Dateiinhalt anzeigen
+        run: cat ausgabe/info.txt
